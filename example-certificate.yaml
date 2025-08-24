@@ -1,0 +1,14 @@
+# Exemplo de certificado usando Let's Encrypt staging
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-tls
+  namespace: default
+spec:
+  secretName: example-tls-secret
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+  - exemplo.com.br
+  - www.exemplo.com.br

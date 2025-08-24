@@ -1,0 +1,25 @@
+# Exemplo de Ingress com certificado automático
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  tls:
+  - hosts:
+    - exemplo.com.br
+    - www.exemplo.com.br
+    secretName: example-tls-secret
+  rules:
+  - host: exemplo.com.br
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: example-service
+            port:
+              number: 80
